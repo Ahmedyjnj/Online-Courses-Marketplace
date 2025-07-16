@@ -1,0 +1,39 @@
+﻿[
+  {
+    "Id": "6ca65466-ad33-43a6-ba30-11eff0866822",
+    "Amount": 500.00,
+    "PaymentDate": "2025-07-10T00:00:00Z",
+    "PaymentMethod": "CreditCard",
+    "PaymentReference": "TXN123456",
+    "Type": 1
+  },
+  {
+    "Id": "b669c8b6-c907-4148-a0e4-225a08901d57",
+    "Amount": 300.00,
+    "PaymentDate": "2025-07-11T00:00:00Z",
+    "PaymentMethod": "PayPal",
+    "PaymentReference": "TXN654321",
+    "Type": 1
+  },
+
+  {
+    "Id": "590cc82e-7eb6-4ab4-8f65-ad768ebdf9cc",
+    "Amount": 750.00,
+    "PaymentDate": "2025-07-12T00:00:00Z",
+    "PaymentMethod": "BankTransfer",
+    "PaymentReference": "TXN777777",
+    "Type": 0
+  },
+  {
+    "Id": "a4ed2866-4cc2-4653-a49e-451c97d4be26",
+    "Amount": 200.00,
+    "PaymentDate": "2025-07-13T00:00:00Z",
+    "PaymentMethod": "Cash",
+    "PaymentReference": "TXN888888",
+    "Type": 0
+  }
+  
+
+
+
+]

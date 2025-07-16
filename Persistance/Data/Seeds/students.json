@@ -1,0 +1,24 @@
+﻿[
+  {
+    "Id": "e1d18f4c-0ef3-4dc3-93cf-7b758e7f81a5",
+    "Name": "Ahmed Ali",
+    "Email": "ahmed.ali@example.com",
+    "Phone": "01012345678",
+    "Gender": "Male",
+    "DateOfBirth": "2002-06-15T00:00:00Z",
+    "Rating": 4.7,
+    "RegistrationDate": "2025-07-01T00:00:00Z",
+    "PhotoUrl": "/images/students/ahmed.jpg"
+  },
+  {
+    "Id": "a5c905ee-9c4c-4b58-b72d-c2b7f1c16f0f",
+    "Name": "Mona Hassan",
+    "Email": "mona.hassan@example.com",
+    "Phone": "01123456789",
+    "Gender": "Female",
+    "DateOfBirth": "2001-11-02T00:00:00Z",
+    "Rating": 4.2,
+    "RegistrationDate": "2025-07-02T00:00:00Z",
+    "PhotoUrl": "/images/students/mona.jpg"
+  }
+]

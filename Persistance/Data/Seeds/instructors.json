@@ -1,0 +1,26 @@
+﻿[
+  {
+    "Id": "a1b2c3d4-1111-1111-1111-111111111111",
+    "Name": "Ali Mostafa",
+    "Email": "ali.mostafa@example.com",
+    "Country": "Egypt",
+    "Gender": "Male",
+    "DateOfBirth": "1985-04-12T00:00:00Z",
+    "IsActive": true,
+    "PhotoUrl": "/images/instructors/ali.jpg",
+    "ResumeUrl": "/resumes/ali-mostafa.pdf",
+    "Description": "Senior Software Engineer with 10+ years of experience in .NET and Azure."
+  },
+  {
+    "Id": "b2c3d4e5-2222-2222-2222-222222222222",
+    "Name": "Sara Adel",
+    "Email": "sara.adel@example.com",
+    "Country": "Egypt",
+    "Gender": "Female",
+    "DateOfBirth": "1990-07-25T00:00:00Z",
+    "IsActive": false,
+    "PhotoUrl": "/images/instructors/sara.jpg",
+    "ResumeUrl": "/resumes/sara-adel.pdf",
+    "Description": "Full Stack Developer and Instructor in frontend and backend technologies."
+  }
+]

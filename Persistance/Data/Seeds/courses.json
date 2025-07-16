@@ -1,0 +1,20 @@
+﻿[
+  {
+    "Id": "d4e5f6a7-3333-3333-3333-333333333333",
+    "Title": "C# Basics",
+    "Description": "Introduction to C# programming.",
+    "Category": "Programming",
+    "StartDate": "2025-08-01T00:00:00Z",
+    "EndDate": "2025-09-01T00:00:00Z",
+    "InstructorId": "a1b2c3d4-1111-1111-1111-111111111111"
+  },
+  {
+    "Id": "05d3102c-8446-47f6-8a62-060c3da77b29",
+    "Title": "ASP.NET Core Web API",
+    "Description": "Learn to build RESTful APIs using ASP.NET Core.",
+    "Category": "Web Development",
+    "StartDate": "2025-09-05T00:00:00Z",
+    "EndDate": "2025-10-05T00:00:00Z",
+    "InstructorId": "b2c3d4e5-2222-2222-2222-222222222222"
+  }
+]

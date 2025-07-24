@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Domain.Models.Courses;
 using Domain.Models.Instructors;
+using Microsoft.Extensions.Configuration;
+using Services.MappingProfiles.UrlResolver;
 using Shared.Dto_s.CourseDto;
 using Shared.Dto_s.InstructorDto;
 using System;
@@ -15,14 +17,20 @@ namespace Services.MappingProfiles
     {
         public InstructorProfile()
         {
-            CreateMap<Instructor, InstructorCreateDto>().ReverseMap();
+            CreateMap<Instructor, InstructorCreateDto>()
+               .ReverseMap();
 
 
 
-            CreateMap<Instructor, InstructorReadDto>().ReverseMap();
+            CreateMap<Instructor, InstructorReadDto>()
+                .ForMember(Dist => Dist.PhotoUrl, options => options.MapFrom<InstructorResolver>())
 
 
-            CreateMap<Instructor, InstructorSimpleDto>().ReverseMap();
+                .ReverseMap();
+
+            CreateMap<Instructor, InstructorSimpleDto>()
+                 .ForMember(Dist => Dist.PhotoUrl, options => options.MapFrom<InstructorResolver>())
+                .ReverseMap();
         }
     }
 }

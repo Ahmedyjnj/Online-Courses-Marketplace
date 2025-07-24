@@ -5,22 +5,25 @@ using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using Domain.Models.Courses;
-
+using Domain.Models.Identity;
 using Domain.Models.Instructors;
 
 using Domain.Models.Payments;
 using Domain.Models.Students;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using static Domain.Models.Payments.Payment;
 
 namespace Persistance.Data
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
     {
-        public AppDbContext(DbContextOptions options) : base(options)
-        {
-        }
+      
+
+
+     
         public DbSet<Course> Courses { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Instructor> Instructors { get; set; }
@@ -38,18 +41,19 @@ namespace Persistance.Data
         public DbSet<InstructorPayment> InstructorPayments { get; set; }
 
 
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
            
 
 
-
-
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
+
             base.OnModelCreating(modelBuilder);
             //this for any who inherit from public interface IEntityTypeConfiguration
-
-
+           
 
 
         }

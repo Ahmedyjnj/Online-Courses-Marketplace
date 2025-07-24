@@ -1,0 +1,60 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+
+
+
+.navbar-custom {
+    background: #1565c0;
+    box-shadow: 0 2px 8px rgba(21, 101, 192, 0.08);
+}
+
+.navbar-custom .navbar-brand, .navbar-custom .nav-link {
+    color: #fff !important;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+    .navbar-custom .nav-link:hover, .navbar-custom .nav-link:focus {
+        color: #90caf9 !important;
+        background: rgba(255,255,255,0.08);
+        border-radius: 0.25rem;
+        transition: background 0.2s, color 0.2s;
+    }
+
+.navbar-custom .navbar-toggler {
+    border-color: #fff;
+}
+
+.navbar-custom .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255,0.7)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+@media (max-width: 991.98px) {
+    .navbar-custom .navbar-collapse {
+        background: #1565c0;
+        padding: 1rem;
+        border-radius: 0 0 0.5rem 0.5rem;
+    }
+}
+
+
+
+
+

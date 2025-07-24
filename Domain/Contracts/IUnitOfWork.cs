@@ -16,9 +16,9 @@ namespace Domain.Contracts
            where TEntity :ModelBase<Tkey>;
 
 
-        IGenericRepository<TEntity> GetRepositoryWithNoid<TEntity>() 
-            where TEntity:class;
-              
+        IGenericRepositoryNoKey<TEntity> GetRepositoryWithNoid<TEntity>()
+            where TEntity : class;
+
 
         Task<int> SaveChangesAsync();
 

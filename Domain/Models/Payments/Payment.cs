@@ -18,7 +18,7 @@ namespace Domain.Models.Payments
 
        
 
-        public virtual ICollection<StudentPayment> EnrollmentPayments { get; set; }
+        public virtual ICollection<StudentPayment> StudentPayments { get; set; }
         public virtual ICollection<InstructorPayment> InstructorPayments { get; set; }
 
     }

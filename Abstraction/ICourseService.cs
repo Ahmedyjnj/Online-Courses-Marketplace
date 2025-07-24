@@ -11,12 +11,14 @@ namespace Abstraction
     public interface ICourseService
     {
         Task<CourseReadDto> GetByIdAsync(Guid id);
-        Task<IEnumerable<CourseReadDto>> GetAllAsync();
+        Task<IEnumerable<CourseReadDto>> GetAllAsync(string? search = null);
+
+        Task<IEnumerable<CourseReadDto>> GetCourseswithInstructorId(Guid InstructorId);
         Task<bool> CreateAsync(CourseCreateDto dto);
         Task<bool> UpdateAsync(Guid id, CourseCreateDto dto);
         Task<bool> DeleteAsync(Guid id);
-        Task<IEnumerable<InstructorSimpleDto>> GetInstructorsByCourseId(Guid courseId);
 
+        Task<IEnumerable<CourseReadDto>> GetByStudentIdAsync(Guid id);
 
     }
 }

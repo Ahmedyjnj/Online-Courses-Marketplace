@@ -12,10 +12,14 @@ namespace Services.Specifications
     public abstract class BaseSpecification<TEntity, Tkey> : ISpecifications<TEntity, Tkey>
         where TEntity : ModelBase<Tkey>
     {
-        public Expression<Func<TEntity, bool>>? Criteria {  get; private set; }
+        public Expression<Func<TEntity, bool>>? Criteria {  get;   set; }
 
-        public List<Expression<Func<TEntity, object>>> IncludeExpressions { get; private set; }
+        public List<Expression<Func<TEntity, object>>> IncludeExpressions { get; private set; } = new();
 
+        protected BaseSpecification()
+        {
+            
+        }
 
         public BaseSpecification(Expression<Func<TEntity, bool>> PassedExpression)
         {
@@ -28,7 +32,7 @@ namespace Services.Specifications
             IncludeExpressions.Add(includeExpression);
         }
 
-
+      
 
 
     }

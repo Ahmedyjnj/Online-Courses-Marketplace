@@ -1,5 +1,7 @@
 ﻿using Domain.Contracts;
 using Domain.Models;
+using Domain.Models.Instructors;
+using Domain.Models.Students;
 using Microsoft.EntityFrameworkCore;
 using Persistance.Data;
 using System;
@@ -10,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Persistance.Repositories
 {
-    class GenericRepository<TEntity, Tkey>(AppDbContext context) : IGenericRepository<TEntity, Tkey>
+    class GenericRepository<TEntity, Tkey>(AppDbContext context) : IGenericRepository<TEntity,Tkey>
     where TEntity : ModelBase<Tkey>
     {
 
@@ -39,47 +41,30 @@ namespace Persistance.Repositories
             return await SpecificationEvaluator.CreateQuery(context.Set<TEntity>(), spec).FirstOrDefaultAsync();
         }
 
-        public async Task AddAsync(TEntity entity)
+        
+
+      
+
+      
+
+         public async Task AddAsync(TEntity entity)
         {
-           await context.Set<TEntity>().AddAsync(entity);
-           
-        }
-
-        public async Task UpdateAsync(TEntity entity)
-        {
-            context.Set<TEntity>().Update(entity);
-          
-        }
-
-        public  async Task DeleteAsync(TEntity entity)
-        {
-            context.Set<TEntity>().Remove(entity);
-           
-        }
-
-
-
-
-    }
-    class GenericRepository<TEntity>(AppDbContext context) : IGenericRepository<TEntity>where TEntity:class
-
-    {
-        public async Task AddAsync(TEntity entity)
-        {
-          await  context.Set<TEntity>().AddAsync(entity);
+            await context.Set<TEntity>().AddAsync(entity);
             
         }
 
         public async Task UpdateAsync(TEntity entity)
         {
-             context.Set<TEntity>().Update(entity);
-           
+            context.Set<TEntity>().Update(entity);
         }
 
         public async Task DeleteAsync(TEntity entity)
         {
             context.Set<TEntity>().Remove(entity);
-           
         }
+
+     
+
     }
+   
 }

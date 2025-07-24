@@ -15,7 +15,22 @@ namespace Persistance.Data.Configuration.StudentConfigurations
         {
 
             builder 
-               .HasKey(e => new { e.StudentId, e.CourseId });
+               .HasKey(e=>e.Id);
+
+            builder.HasOne(se => se.Student)
+                .WithMany(s => s.Enrollments)
+                .HasForeignKey(se => se.StudentId);
+
+            builder.HasOne(se => se.Course)
+            .WithMany(c => c.Enrollments)
+             .HasForeignKey(se => se.CourseId);
+
+            builder.HasMany(e => e.studentPayments)
+                .WithOne(e => e.StudentEnrollment)
+                .HasForeignKey(e=>e.StudentEnrollmentId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasIndex(se => new { se.StudentId, se.CourseId }).IsUnique();
         }
     }
 }

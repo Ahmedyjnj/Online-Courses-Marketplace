@@ -1,0 +1,227 @@
+﻿
+body {
+    background: linear-gradient(135deg, #0093ff 0%, #000000 100%);
+    color: #e2e8f0;
+    overflow-x: hidden;
+}
+
+.signup-fade-in {
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.form-floating > .form-control:focus, .form-floating > .form-select:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 0.2rem rgba(99, 102, 241, 0.25);
+    transition: all 0.15s ease-in-out;
+    background-color: #1e293b;
+    color: #e2e8f0;
+}
+
+.card {
+    border-radius: 1rem;
+    box-shadow: 0 6px 28px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(6px);
+}
+
+.btn-primary {
+    background-color: #6366f1;
+    border: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+    .btn-primary:hover, .btn-primary:focus {
+        background-color: #4f46e5;
+        transform: translateY(-1px) scale(1.04);
+        box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
+    }
+
+    .btn-primary:active {
+        background-color: #4338ca;
+        transform: scale(0.97);
+    }
+
+.svg-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    opacity: 0.15;
+    pointer-events: none;
+}
+
+    .svg-bg circle {
+        transform-box: fill-box;
+        transform-origin: 50% 50%;
+    }
+
+.circle-1 {
+    animation: move1 6s ease-in-out infinite alternate, pulse1 4s ease-in-out infinite;
+}
+
+.circle-2 {
+    animation: move2 5s ease-in-out infinite alternate, pulse2 4s ease-in-out infinite;
+}
+
+.circle-3 {
+    animation: move3 7s ease-in-out infinite alternate, pulse3 5s ease-in-out infinite;
+}
+
+.circle-4 {
+    animation: move4 6s ease-in-out infinite alternate, pulse4 5s ease-in-out infinite;
+}
+
+@keyframes move1 {
+    0% {
+        transform: translate(0,0) scale(1);
+    }
+
+    100% {
+        transform: translate(40px, 30px) scale(1.08);
+    }
+}
+
+@keyframes pulse1 {
+    0%, 100% {
+        filter: blur(0px);
+    }
+
+    50% {
+        filter: blur(2px);
+    }
+}
+
+@keyframes move2 {
+    0% {
+        transform: translate(0,0) scale(1);
+    }
+
+    100% {
+        transform: translate(-30px, 50px) scale(1.1);
+    }
+}
+
+@keyframes pulse2 {
+    0%, 100% {
+        filter: blur(0px);
+    }
+
+    50% {
+        filter: blur(1.5px);
+    }
+}
+
+@keyframes move3 {
+    0% {
+        transform: translate(0,0) scale(1);
+    }
+
+    100% {
+        transform: translate(60px, -20px) scale(0.95);
+    }
+}
+
+@keyframes pulse3 {
+    0%, 100% {
+        filter: blur(0px);
+    }
+
+    50% {
+        filter: blur(3px);
+    }
+}
+
+@keyframes move4 {
+    0% {
+        transform: translate(0,0) scale(1);
+    }
+
+    100% {
+        transform: translate(-50px, -40px) scale(1.05);
+    }
+}
+
+@keyframes pulse4 {
+    0%, 100% {
+        filter: blur(0px);
+    }
+
+    50% {
+        filter: blur(2px);
+    }
+}
+
+.svg-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    pointer-events: none;
+    background: radial-gradient(circle at 80% 10%, #c084fc33 0, transparent 60%), radial-gradient(circle at 10% 90%, #34d39933 0, transparent 60%);
+    opacity: 0.3;
+}
+
+.invalid-feedback.d-block {
+    animation: shake 0.25s ease-in-out both;
+}
+
+@keyframes shake {
+    10%, 90% {
+        transform: translateX(-1px);
+    }
+
+    20%, 80% {
+        transform: translateX(2px);
+    }
+
+    30%, 50%, 70% {
+        transform: translateX(-3px);
+    }
+
+    40%, 60% {
+        transform: translateX(3px);
+    }
+}
+
+.login-link {
+    display: block;
+    text-align: center;
+    margin-top: 1.5rem;
+    color: #a5b4fc;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s;
+    z-index: 2;
+    position: relative;
+}
+
+    .login-link:hover {
+        color: #818cf8;
+        text-decoration: underline;
+    }
+
+@media (max-width: 576px) {
+    .card {
+        padding: 1.5rem 1rem;
+    }
+
+    .svg-bg {
+        width: 180px;
+        height: 180px;
+    }
+}

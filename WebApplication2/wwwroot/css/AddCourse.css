@@ -1,0 +1,84 @@
+﻿
+    body {
+        background: linear-gradient(135deg, #6c63ff 0%, #48c6ef 100%);
+        min-height: 100vh;
+    }
+
+    .add-course-container {
+        max-width: 500px;
+        margin: 3rem auto;
+    }
+
+    .add-course-card {
+        background: #fff;
+        border-radius: 1.5rem;
+        box-shadow: 0 4px 32px rgba(76,99,255,0.10);
+        padding: 2.5rem 2rem 2rem 2rem;
+        margin-bottom: 2rem;
+        position: relative;
+    }
+
+        .add-course-card h1 {
+            color: #6c63ff;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .add-course-card h4 {
+            color: #48c6ef;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+    .form-label, .control-label {
+        color: #2d3a4a;
+        font-weight: 500;
+    }
+
+    .form-control {
+        border-radius: 0.7rem;
+        border: 1px solid #e0e6ed;
+        margin-bottom: 1rem;
+        font-size: 1.05rem;
+    }
+
+        .form-control:focus {
+            border-color: #6c63ff;
+            box-shadow: 0 0 0 0.2rem rgba(76,99,255,0.10);
+        }
+
+    .btn-success {
+        background: linear-gradient(90deg, #6c63ff 0%, #48c6ef 100%);
+        border: none;
+        font-weight: 600;
+        border-radius: 0.7rem;
+        padding: 0.7rem 2rem;
+        font-size: 1.1rem;
+        transition: background 0.2s;
+    }
+
+        .btn-success:hover {
+            background: linear-gradient(90deg, #4834d4 0%, #0099f7 100%);
+        }
+
+    .back-link {
+        color: #6c63ff;
+        font-weight: 500;
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+
+        .back-link:hover {
+            color: #4834d4;
+            text-decoration: underline;
+        }
+
+    .form-section {
+        margin-bottom: 1.5rem;
+    }
+
+    .text-danger {
+        font-size: 0.97rem;
+    }

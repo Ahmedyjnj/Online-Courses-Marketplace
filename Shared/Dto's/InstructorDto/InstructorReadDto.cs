@@ -8,7 +8,7 @@ namespace Shared.Dto_s.InstructorDto
 {
     public class InstructorReadDto : InstructorCreateDto
     {
-        public Guid Id { get; set; }
+        
         public bool IsActive { get; set; }
     }
 }

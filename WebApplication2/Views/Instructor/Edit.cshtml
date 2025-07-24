@@ -1,0 +1,95 @@
+﻿@using Shared.Dto_s.InstructorDto
+
+@model InstructorCreateDto
+
+@{
+    ViewData["Title"] = "Edit Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg rounded-4">
+        <div class="card-header bg-primary text-white text-center">
+            <h3 class="mb-0">Edit Personal Information</h3>
+        </div>
+
+        <div class="card-body p-4">
+            <form asp-action="Edit" method="post" enctype="multipart/form-data">
+                @Html.AntiForgeryToken()
+                <input type="hidden" asp-for="Id" />
+
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label asp-for="Name" class="form-label"></label>
+                        <input asp-for="Name" class="form-control" placeholder="Enter your full name" />
+                        <span asp-validation-for="Name" class="text-danger small"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="Description" class="form-label"></label>
+                        <input asp-for="Description" class="form-control" />
+                        <span asp-validation-for="Description" class="text-danger small"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="Email" class="form-label"></label>
+                        <input asp-for="Email" class="form-control" placeholder="example@email.com" readonly />
+                        <span asp-validation-for="Email" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Phone" class="form-label"></label>
+                        <input asp-for="Phone" class="form-control" placeholder="+201XXXXXXXXX" />
+                        <span asp-validation-for="Phone" class="text-danger small"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="Country" class="form-label"></label>
+                        <input asp-for="Country" class="form-control"  />
+                        <span asp-validation-for="Country" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Gender" class="form-label"></label>
+                        <select asp-for="Gender" class="form-select">
+                            <option value="">-- Select Gender --</option>
+                            <option value="Male" selected="@(Model.Gender == "Male" ? "selected" : null)">Male</option>
+                            <option value="Female" selected="@(Model.Gender == "Female" ? "selected" : null)">Female</option>
+
+                        </select>
+                        <span asp-validation-for="Gender" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="DateOfBirth" class="form-label"></label>
+                        <input asp-for="DateOfBirth" type="date" class="form-control" />
+                        <span asp-validation-for="DateOfBirth" class="text-danger small"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="ResumeUrl" class="form-label"></label>
+                        <input asp-for="ResumeUrl" class="form-control" />
+                        <span asp-validation-for="ResumeUrl" class="text-danger small"></span>
+                    </div>
+
+
+
+
+                    <input type="hidden" asp-for="PhotoUrl" class="form-control" placeholder="https://example.com/photo.jpg" />
+
+
+                    <div class="col-md-6">
+                        <label asp-for="Photofile" class="form-label">Upload New Photo</label>
+                        <input asp-for="Photofile" type="file" class="form-control" />
+                        <span asp-validation-for="Photofile" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-12 text-center mt-4">
+                        <button type="submit" class="btn btn-success px-4">💾 Save Changes</button>
+                        <a asp-action="Profile" asp-route-id="@Model.Id" class="btn btn-secondary px-4 ms-2">Cancel</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

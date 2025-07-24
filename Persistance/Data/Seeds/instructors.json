@@ -7,7 +7,7 @@
     "Gender": "Male",
     "DateOfBirth": "1985-04-12T00:00:00Z",
     "IsActive": true,
-    "PhotoUrl": "/images/instructors/ali.jpg",
+    "PhotoUrl": "2.png",
     "ResumeUrl": "/resumes/ali-mostafa.pdf",
     "Description": "Senior Software Engineer with 10+ years of experience in .NET and Azure."
   },
@@ -19,7 +19,7 @@
     "Gender": "Female",
     "DateOfBirth": "1990-07-25T00:00:00Z",
     "IsActive": false,
-    "PhotoUrl": "/images/instructors/sara.jpg",
+    "PhotoUrl": "1.png",
     "ResumeUrl": "/resumes/sara-adel.pdf",
     "Description": "Full Stack Developer and Instructor in frontend and backend technologies."
   }

@@ -3,6 +3,7 @@ using Domain.Models.Courses;
 using Domain.Models.Instructors;
 using Domain.Models.Payments;
 using Domain.Models.Students;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -13,9 +14,12 @@ using System.Threading.Tasks;
 
 namespace Persistance.Data
 {
-    public class Dbinializer(AppDbContext context) : IDbinializer
+    public class Dbinializer(AppDbContext context, RoleManager<IdentityRole> roleManager) : IDbinializer
     {
-        public async  Task InitializeAsync()
+       
+
+
+        public async Task InitializeAsync()
         {
             if ((await context.Database.GetPendingMigrationsAsync()).Any())
             {
@@ -24,8 +28,14 @@ namespace Persistance.Data
 
             try
             {
-                // Seed Courses
-               
+                if (!await roleManager.RoleExistsAsync("Student"))
+                    await roleManager.CreateAsync(new IdentityRole("Student"));
+
+                if (!await roleManager.RoleExistsAsync("Instructor"))
+                    await roleManager.CreateAsync(new IdentityRole("Instructor"));
+
+                if (!await roleManager.RoleExistsAsync("Admin"))
+                    await roleManager.CreateAsync(new IdentityRole("Admin"));
 
                 // Seed Instructors
                 if (!context.Instructors.Any())
@@ -109,6 +119,7 @@ namespace Persistance.Data
                     {
                         context.StudentEnrollments.Add(new StudentEnrollment
                         {
+                            
                             StudentId = student2Id,
                             CourseId = course2Id,
                             EnrollmentDate = DateTime.UtcNow,
@@ -130,33 +141,46 @@ namespace Persistance.Data
                     var student1Id = Guid.Parse("e1d18f4c-0ef3-4dc3-93cf-7b758e7f81a5");
                     var student2Id = Guid.Parse("a5c905ee-9c4c-4b58-b72d-c2b7f1c16f0f");
 
+                
+
+                    var course1Id = Guid.Parse("d4e5f6a7-3333-3333-3333-333333333333");
+                    var course2Id = Guid.Parse("05d3102c-8446-47f6-8a62-060c3da77b29");
+
+                    var enrollment1 = await context.StudentEnrollments
+                           .FirstOrDefaultAsync(e => e.StudentId == student1Id && e.CourseId == course1Id);
+
+                    var enrollment2 = await context.StudentEnrollments
+                                            .FirstOrDefaultAsync(e => e.StudentId == student2Id && e.CourseId == course2Id);
+
+
+
                     var payment1Id = Guid.Parse("6ca65466-ad33-43a6-ba30-11eff0866822");
                     var payment2Id = Guid.Parse("b669c8b6-c907-4148-a0e4-225a08901d57");
 
-                    var student1 = await context.Students.FindAsync(student1Id);
-                    var student2 = await context.Students.FindAsync(student2Id);
                     var payment1 = await context.Payments.FindAsync(payment1Id);
                     var payment2 = await context.Payments.FindAsync(payment2Id);
 
-                    if (student1 != null && payment1 != null)
+
+                    if (enrollment1 != null && payment1 != null)
                     {
                         context.StudentPayments.Add(new StudentPayment
                         {
-                            StudentId = student1Id,
+                            StudentEnrollmentId= enrollment1.Id,
                             PaymentId = payment1Id,
                             ProgressPayment = 50,
                             Notes = "Initial payment for course enrollment"
                         });
                     }
 
-                    if (student2 != null && payment2 != null)
+
+                    if (enrollment2 != null && payment2 != null)
                     {
                         context.StudentPayments.Add(new StudentPayment
                         {
-                            StudentId = student2Id,
+                            StudentEnrollmentId = enrollment2.Id,
                             PaymentId = payment2Id,
                             ProgressPayment = 30,
-                            Notes= "Payment for course materials and access"
+                            Notes = "Payment for course materials and access"
                         });
                     }
 
@@ -210,6 +234,6 @@ namespace Persistance.Data
             }
         }
 
-        
+
     }
 }

@@ -15,7 +15,23 @@ namespace Persistance.Data.Configuration.StudentConfigurations
         {
 
             builder
-                .HasKey(ep => new { ep.StudentId, ep.PaymentId });
+                .HasKey(sp => new { sp.StudentEnrollmentId, sp.PaymentId });
+
+            builder.HasOne(e => e.StudentEnrollment)
+                .WithMany(e=>e.studentPayments)
+                .HasForeignKey(sp=>sp.StudentEnrollmentId);
+
+           
+            builder.HasOne(sp => sp.Payment)
+                   .WithMany(p => p.StudentPayments)
+                   .HasForeignKey(sp => sp.PaymentId)
+                   .OnDelete(DeleteBehavior.Restrict);
+
+
+            builder.Property(sp => sp.ProgressPayment)
+              .IsRequired();
+
+
         }
     }
 }

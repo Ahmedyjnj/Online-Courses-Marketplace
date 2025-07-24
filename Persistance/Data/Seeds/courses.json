@@ -6,6 +6,7 @@
     "Category": "Programming",
     "StartDate": "2025-08-01T00:00:00Z",
     "EndDate": "2025-09-01T00:00:00Z",
+    "PhotoUrl": "CsharpBase.jpg",
     "InstructorId": "a1b2c3d4-1111-1111-1111-111111111111"
   },
   {
@@ -15,6 +16,7 @@
     "Category": "Web Development",
     "StartDate": "2025-09-05T00:00:00Z",
     "EndDate": "2025-10-05T00:00:00Z",
+    "PhotoUrl": "Asp.netBase.jpg",
     "InstructorId": "b2c3d4e5-2222-2222-2222-222222222222"
   }
 ]

@@ -1,0 +1,65 @@
+﻿@using static Domain.Models.Identity.ApplicationUser
+@model SignUpViewModel
+@{
+    ViewData["Title"] = "Sign Up";
+}
+
+<link href="~/css/SignUp.css" rel="stylesheet" />
+
+<div class="svg-bg">
+    <svg width="100%" height="100%" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:0;left:0;">
+        <circle class="circle-1" cx="180" cy="160" r="120" fill="#312e81" />
+        <circle class="circle-2" cx="600" cy="120" r="90" fill="#7e22ce" />
+        <circle class="circle-3" cx="200" cy="500" r="80" fill="#059669" />
+        <circle class="circle-4" cx="700" cy="400" r="110" fill="#eab308" />
+    </svg>
+</div>
+<div class="svg-gradient"></div>
+
+<div class="container py-5 position-relative" style="z-index:2;">
+    <div class="card p-4 p-md-5 signup-fade-in mx-auto text-white" style="max-width: 460px; background: rgba(30, 41, 59, 0.95);">
+        <h2 class="text-center mb-4 fw-bold text-light">Create Your Account</h2>
+        <form asp-action="SignUp" method="post">
+            <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="UserName" class="form-control bg-dark text-white border-secondary" placeholder="Username" />
+                <label asp-for="UserName" class="text-white-50"></label>
+                <span asp-validation-for="UserName" class="invalid-feedback d-block"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="Email" class="form-control bg-dark text-white border-secondary" placeholder="Email" />
+                <label asp-for="Email" class="text-white-50"></label>
+                <span asp-validation-for="Email" class="invalid-feedback d-block"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="Password" class="form-control bg-dark text-white border-secondary" type="password" placeholder="Password" />
+                <label asp-for="Password" class="text-white-50"></label>
+                <span asp-validation-for="Password" class="invalid-feedback d-block"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="ConfirmPassword" class="form-control bg-dark text-white border-secondary" type="password" placeholder="Confirm Password" />
+                <label asp-for="ConfirmPassword" class="text-white-50"></label>
+                <span asp-validation-for="ConfirmPassword" class="invalid-feedback d-block"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="Phone" class="form-control bg-dark text-white border-secondary" type="tel" placeholder="Phone" />
+                <label asp-for="Phone" class="text-white-50"></label>
+                <span asp-validation-for="Phone" class="invalid-feedback d-block"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <select asp-for="UserType" asp-items="Html.GetEnumSelectList<UserType>()" class="form-select bg-dark text-white border-secondary" placeholder="User Type"></select>
+                <label asp-for="UserType" class="text-white-50"></label>
+                <span asp-validation-for="UserType" class="invalid-feedback d-block"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 mt-2 py-2 fs-5">Sign Up</button>
+        </form>
+        <a asp-action="Login" class="login-link">Already have an account? Log in</a>
+    </div>
+</div>

@@ -8,7 +8,7 @@ namespace Shared.Dto_s.StudentDto
 {
     public class StudentReadDto : StudentCreateDto
     {
-        public Guid Id { get; set; }
+       
         public DateTime RegistrationDate { get; set; }
         public double? Rating { get; set; }
     }

@@ -11,11 +11,14 @@ namespace Abstraction
     public interface IStudentService
     {
         Task<StudentReadDto> GetByIdAsync(Guid id);
+
+        Task<StudentReadDto> GetByEmailAsync(string email);
+
         Task<IEnumerable<StudentReadDto>> GetAllAsync();
-        Task<Guid> RegisterAsync(StudentCreateDto dto);
-        Task UpdateAsync(Guid id, StudentCreateDto dto);
-        Task DeleteAsync(Guid id);
-        Task EnrollInCourseAsync(EnrollmentCreateDto dto);
+        Task<bool> CreateAsync(StudentCreateDto dto);
+        Task<bool> UpdateAsync(Guid id, StudentCreateDto dto);
+        Task<bool> DeleteAsync(Guid id);
+        Task<bool> EnrollInCourseAsync(EnrollmentCreateDto dto);
 
 
     }

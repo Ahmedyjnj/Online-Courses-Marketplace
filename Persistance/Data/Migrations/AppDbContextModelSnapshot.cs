@@ -45,6 +45,9 @@ namespace Persistance.Data.Migrations
                     b.Property<Guid>("InstructorId")
                         .HasColumnType("uuid");
 
+                    b.Property<string>("PhotoUrl")
+                        .HasColumnType("text");
+
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("timestamp with time zone");
 
@@ -138,6 +141,10 @@ namespace Persistance.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("PhotoUrl")
                         .HasColumnType("text");
 
@@ -207,7 +214,7 @@ namespace Persistance.Data.Migrations
 
             modelBuilder.Entity("Domain.Models.Payments.StudentPayment", b =>
                 {
-                    b.Property<Guid>("StudentId")
+                    b.Property<Guid>("StudentEnrollmentId")
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("PaymentId")
@@ -220,9 +227,14 @@ namespace Persistance.Data.Migrations
                     b.Property<int>("ProgressPayment")
                         .HasColumnType("integer");
 
-                    b.HasKey("StudentId", "PaymentId");
+                    b.Property<Guid?>("StudentId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("StudentEnrollmentId", "PaymentId");
 
                     b.HasIndex("PaymentId");
+
+                    b.HasIndex("StudentId");
 
                     b.ToTable("StudentPayments");
                 });
@@ -270,7 +282,8 @@ namespace Persistance.Data.Migrations
 
             modelBuilder.Entity("Domain.Models.Students.StudentEnrollment", b =>
                 {
-                    b.Property<Guid>("StudentId")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("CourseId")
@@ -286,12 +299,18 @@ namespace Persistance.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<Guid>("StudentId")
+                        .HasColumnType("uuid");
+
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.HasKey("StudentId", "CourseId");
+                    b.HasKey("Id");
 
                     b.HasIndex("CourseId");
+
+                    b.HasIndex("StudentId", "CourseId")
+                        .IsUnique();
 
                     b.ToTable("StudentEnrollments");
                 });
@@ -351,20 +370,24 @@ namespace Persistance.Data.Migrations
             modelBuilder.Entity("Domain.Models.Payments.StudentPayment", b =>
                 {
                     b.HasOne("Domain.Models.Payments.Payment", "Payment")
-                        .WithMany("EnrollmentPayments")
+                        .WithMany("StudentPayments")
                         .HasForeignKey("PaymentId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Domain.Models.Students.Student", "Student")
-                        .WithMany("Payments")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                    b.HasOne("Domain.Models.Students.StudentEnrollment", "StudentEnrollment")
+                        .WithMany("studentPayments")
+                        .HasForeignKey("StudentEnrollmentId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("Domain.Models.Students.Student", null)
+                        .WithMany("StudentPayments")
+                        .HasForeignKey("StudentId");
 
                     b.Navigation("Payment");
 
-                    b.Navigation("Student");
+                    b.Navigation("StudentEnrollment");
                 });
 
             modelBuilder.Entity("Domain.Models.Students.StudentEnrollment", b =>
@@ -404,16 +427,21 @@ namespace Persistance.Data.Migrations
 
             modelBuilder.Entity("Domain.Models.Payments.Payment", b =>
                 {
-                    b.Navigation("EnrollmentPayments");
-
                     b.Navigation("InstructorPayments");
+
+                    b.Navigation("StudentPayments");
                 });
 
             modelBuilder.Entity("Domain.Models.Students.Student", b =>
                 {
                     b.Navigation("Enrollments");
 
-                    b.Navigation("Payments");
+                    b.Navigation("StudentPayments");
+                });
+
+            modelBuilder.Entity("Domain.Models.Students.StudentEnrollment", b =>
+                {
+                    b.Navigation("studentPayments");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,4 +1,5 @@
-﻿using Domain.Models.Payments;
+﻿using Domain.Models.Identity;
+using Domain.Models.Payments;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,9 +25,12 @@ namespace Domain.Models.Students
 
         public string? PhotoUrl { get; set; }
 
+        
+      
+
 
         public virtual ICollection<StudentEnrollment> Enrollments { get; set; }
 
-        public virtual ICollection<StudentPayment> Payments { get; set; }
+        public virtual ICollection<StudentPayment> StudentPayments { get; set; }
     }
 }

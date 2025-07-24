@@ -1,4 +1,5 @@
 ﻿using Domain.Models.Courses;
+using Domain.Models.Identity;
 using Domain.Models.Payments;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,8 @@ namespace Domain.Models.Instructors
         public string? Gender { get; set; }
         public DateTime? DateOfBirth { get; set; }
 
+        public string Phone { get; set; }
+
         public bool IsActive { get; set; } = false;
 
         public string? ResumeUrl { get; set; }
@@ -28,6 +31,9 @@ namespace Domain.Models.Instructors
         public virtual ICollection<Course> Courses { get; set; }
 
         public virtual ICollection<InstructorPayment> InstructorPayments { get; set; }
+
+        
+      
 
     }
 }

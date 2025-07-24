@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Models.Students
 {
-    public class StudentEnrollment
+    public class StudentEnrollment : ModelBase<Guid>
     {
        
         public Guid StudentId { get; set; }
@@ -25,14 +25,14 @@ namespace Domain.Models.Students
 
         [ForeignKey("CourseId")]
         public virtual Course Course { get; set; } // Fully qualify the Course type to resolve ambiguity  
-        
-        
-        
-        
-        
-        
-        
-        
-       
+
+
+
+        public virtual ICollection<StudentPayment> studentPayments { get; set; }
+
+
+
+
+
     }
 }

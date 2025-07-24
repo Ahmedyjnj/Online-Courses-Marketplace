@@ -18,7 +18,7 @@ namespace Domain.Models.Courses
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
 
-
+        public string? PhotoUrl { get; set; }
         public Guid InstructorId { get; set; }       
         public virtual Instructor Instructor { get; set; }
 

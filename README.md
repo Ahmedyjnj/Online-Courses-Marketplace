@@ -4,9 +4,36 @@ This project is a complete **ASP.NET Core MVC** application that simulates an on
 
 ---
 
-## ✨ Features
-![Uploading capture_250729_084139.png…]()
-![Uploading capture_250729_084146.png…]()
+# 🎓 Online Courses Marketplace
+
+A full-featured online course platform built using **ASP.NET Core MVC**, offering students and instructors a seamless experience for managing, purchasing, and viewing educational video content.
+
+---
+
+## 📌 Features
+
+* 🔐 Secure user authentication & authorization (Student / Instructor roles)
+* 📈 Course listing with filtering, search, and categories
+* 💳 Online payment system integrated with **Paymob** API
+* 🎥 Protected video streaming using **HLS** and access control
+* 📅 Instructor and student dashboards with profile editing
+* 🔍 Searchable course catalog and detail pages
+* 💬 Real-time support chat via **SignalR**
+* ☁️ Cloud uploads for videos and images (Cloudinary or custom uploader)
+* 🛒 Basket system with Redis-based caching
+
+---
+
+## 📊 Technologies Used
+
+* **ASP.NET Core 8 MVC**
+* **Entity Framework Core** + PostgreSQL
+* **SignalR** for real-time communication
+* **Paymob API** for secure payments
+* **Redis** for basket/session caching
+* **Cloudinary** or local FFmpeg-based HLS streaming
+* **Bootstrap 5**, **Animate.css** for modern UI
+
 
 ### 🎓 Students
 
@@ -64,18 +91,6 @@ This project is a complete **ASP.NET Core MVC** application that simulates an on
 
   * `HomeController`, `CourseController`, `PaymentController`, etc.
 * Views for student, instructor, and admin roles
-
----
-
-## 🚀 Technologies Used
-
-* **ASP.NET Core MVC 8**
-* **Entity Framework Core 8**
-* **PostgreSQL**
-* **Redis** (optional caching)
-* **SignalR** (live support)
-* **Paymob API**
-* **Bootstrap 5**
 
 ---
 

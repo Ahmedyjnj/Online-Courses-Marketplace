@@ -5,6 +5,8 @@ This project is a complete **ASP.NET Core MVC** application that simulates an on
 ---
 
 ## ✨ Features
+![Uploading capture_250729_084139.png…]()
+![Uploading capture_250729_084146.png…]()
 
 ### 🎓 Students
 

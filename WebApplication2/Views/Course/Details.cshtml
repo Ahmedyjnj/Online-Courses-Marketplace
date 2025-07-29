@@ -1,0 +1,45 @@
+﻿@model CourseContentListViewModel
+
+@{
+    ViewData["Title"] = "Course Contents";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Course Contents</h2>
+
+    <div>
+        <span class="fw-bold text-success me-3 fs-5">Price: @Model.Price EGP</span>
+
+        <a href="@Url.Action("StartPayment", "Payment", new { id = Model.CourseId })" class="btn btn-outline-info mt-3">
+            <button type="submit" class="btn btn-success w-100">💳 Pay Now</button>
+
+        </a>
+    </div>
+</div>
+
+    @if (!Model.Contents.Any())
+    {
+        <div class="alert alert-info">No content found for this course.</div>
+    }
+    else
+    {
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            @foreach (var item in Model.Contents)
+            {
+                <div class="col">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body">
+                            
+
+                            <div class="image-wrapper position-relative mb-3 rounded overflow-hidden" style="height: 200px;">
+                                <img src="@Url.Content(item.ImageDto.Url)" alt="@item.ImageDto.AltText ?? item.VideoDto.Title" class="w-100 h-100 object-fit-cover rounded" />
+                            </div>
+
+                            <p> @item.ImageDto.AltText</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

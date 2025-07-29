@@ -12,7 +12,9 @@ namespace Abstraction
         ICourseService CourseService { get; }
         IStudentService StudentService { get; }
         IInstructorService InstructorService { get; }
-        IPaymentService PaymentService { get; }
+        IPaymentServices PaymentService { get; }
+
+        IContentServices ContentServices { get; }
 
         IAttachmentServices AttachmentService { get; }
         

@@ -1,0 +1,120 @@
+﻿@using Shared.Dto_s.ContentDto
+@model ContentDto
+
+<div class="container mt-5">
+    <h2 class="mb-4">Update Video Content</h2>
+
+    <div id="progressContainer" style="display: none;">
+        <div class="progress">
+            <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated"
+                 role="progressbar" style="width: 0%">
+                0%
+            </div>
+        </div>
+    </div>
+
+    <div id="uploadStatus" class="mt-3"></div>
+
+    <form id="uploadForm" enctype="multipart/form-data" method="post">
+        <input type="hidden" name="CourseId" value="@Model.CourseId" />
+        <input type="hidden" name="VideoDto.Id" value="@Model.VideoDto?.Id" />
+        <input type="hidden" name="ImageDto.Id" value="@Model.ImageDto?.Id" />
+        <input asp-for="VideoDto.Url" class="form-control" hidden />
+        <input asp-for="ImageDto.Url" class="form-control" hidden />
+
+        <div class="mb-3">
+            <label class="form-label">Video Title</label>
+            <input name="VideoDto.Title" class="form-control" value="@Model.VideoDto?.Title" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Image Alt Text</label>
+            <input name="ImageDto.AltText" class="form-control" value="@Model.ImageDto?.AltText" readonly />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Upload Video File (optional)</label>
+            <input name="VideoDto.Videofile" type="file" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Upload Thumbnail Image (optional)</label>
+            <input name="ImageDto.Photofile" type="file" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="submitBtn">
+            <i class="bi bi-upload"></i> Upload Content
+        </button>
+        <a asp-action="Index" asp-route-id="@Model.CourseId" class="btn btn-secondary ms-2">Cancel</a>
+    </form>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const videoTitleInput = document.querySelector('[name="VideoDto.Title"]');
+            const imageAltInput = document.querySelector('[name="ImageDto.AltText"]');
+
+            if (videoTitleInput && imageAltInput) {
+                videoTitleInput.addEventListener("input", function () {
+                    imageAltInput.value = videoTitleInput.value;
+                });
+            }
+
+            document.getElementById('uploadForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const form = e.target;
+                const formData = new FormData(form);
+
+                const progressContainer = document.getElementById('progressContainer');
+                const progressBar = document.getElementById('progressBar');
+                const status = document.getElementById('uploadStatus');
+                const submitBtn = document.getElementById('submitBtn');
+
+                progressContainer.style.display = 'block';
+                progressBar.style.width = '0%';
+                progressBar.innerText = '0%';
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = 'Uploading...';
+
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', '/Content/UpdateVideo', true);
+
+                xhr.upload.onprogress = function (e) {
+                    if (e.lengthComputable) {
+                        let percent = Math.round((e.loaded / e.total) * 100);
+                        progressBar.style.width = percent + '%';
+                        progressBar.innerText = percent + '%';
+                    }
+                };
+
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        const response = JSON.parse(xhr.responseText);
+                        status.innerHTML = '<div class="alert alert-success">Upload successful.</div>';
+                        progressBar.classList.remove("bg-danger");
+                        progressBar.classList.add("bg-success");
+                        setTimeout(() => {
+                            window.location.href = response.redirectUrl;
+                        }, 1500);
+                    } else {
+                        status.innerHTML = '<div class="alert alert-danger">Upload failed.</div>';
+                        progressBar.classList.add("bg-danger");
+                    }
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="bi bi-upload"></i> Upload Content';
+                };
+
+                xhr.onerror = function () {
+                    status.innerHTML = '<div class="alert alert-danger">Upload error occurred.</div>';
+                    progressBar.classList.add("bg-danger");
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="bi bi-upload"></i> Upload Content';
+                };
+
+                xhr.send(formData);
+            });
+        });
+    </script>
+}

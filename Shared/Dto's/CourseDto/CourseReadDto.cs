@@ -18,6 +18,8 @@ namespace Shared.Dto_s.CourseDto
         public string? PhotoUrl { get; set; }
         public DateTime EndDate { get; set; }
 
+        public int Price { get; set; }  
+
         public Guid InstructorId { get; set; }
         public InstructorSimpleDto? Instructor { get; set; }
 

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shared.Dto_s.CourseDto;
 using System.Threading.Tasks;
+using WebApplication2.ViewModels;
 
 namespace WebApplication2.Controllers
 {
@@ -63,7 +64,7 @@ namespace WebApplication2.Controllers
             }
             if (model is not null && model.Photofile?.Length > 0)
             {
-                model.PhotoUrl = serviceManager.AttachmentService.UploadFile("Courses", model.Photofile);
+                model.PhotoUrl =await serviceManager.AttachmentService.UploadImage("Courses", model.Photofile);
             }
 
             
@@ -87,9 +88,22 @@ namespace WebApplication2.Controllers
         public async Task<IActionResult> Details(Guid id)
         {
 
-            var course = await serviceManager.CourseService.GetAllAsync();
+            var course = await serviceManager.CourseService.GetByIdAsync(id);
+            if (course == null)
+                return NotFound("Course not found");
 
-            return View(course);
+            var contents = await serviceManager.ContentServices.GetAllWithoutAccerssAsync(id);
+            
+            
+
+            var viewmodel = new CourseContentListViewModel
+            {
+                CourseId = id,
+                Price= course.Price,
+                Contents = contents
+            };
+
+            return View(viewmodel);
         }
     }
 }

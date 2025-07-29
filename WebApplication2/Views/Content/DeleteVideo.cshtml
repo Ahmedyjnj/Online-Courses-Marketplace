@@ -1,0 +1,36 @@
+﻿@using Shared.Dto_s.ContentDto
+@model ContentDto
+
+@{
+    ViewData["Title"] = "Delete Video Content";
+}
+
+
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="text-danger">@Model.VideoDto.Title</h4>
+
+      
+
+        <div class="mb-3">
+            <label class="form-label">Video Preview:</label><br />
+            <video controls style="max-width: 100%; height: auto;">
+                <source src="@Model.VideoDto?.Url" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <form asp-action="ConfirmDelete" method="post">
+            <input type="hidden" asp-for="VideoDto.Id" />
+            <input type="hidden" asp-for="CourseId" />
+            
+            <input type="hidden" asp-for="ImageDto.Id" />
+            <input type="hidden" asp-for="VideoDto.Url" />
+            <input type="hidden" asp-for="ImageDto.Url" />
+
+            <button type="submit" class="btn btn-danger">Delete</button>
+            <a asp-action="Index" asp-route-id="@Model.CourseId" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>

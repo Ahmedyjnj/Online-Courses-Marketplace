@@ -1,4 +1,5 @@
 using Abstraction;
+using CloudinaryDotNet;
 using Domain.Contracts;
 using Domain.Models.Identity;
 using Microsoft.AspNetCore.Identity;
@@ -9,6 +10,7 @@ using Persistance.Data;
 using Persistance.Repositories;
 using Services;
 using WebApplication2.Claims;
+using WebApplication2.Hubs;
 using IdentityDbContext = Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext;
 
 namespace WebApplication2
@@ -62,13 +64,30 @@ namespace WebApplication2
 
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
-
-
+            builder.Services.AddSignalR();
+            builder.Services.AddHttpClient();
             builder.Services.AddScoped<IDbinializer, Dbinializer>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
            
             builder.Services.AddScoped<IServiceManager, ServicesManager>();
+           
+           
             builder.Services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, CustomClaimsPrincipalFactory>();
+
+            builder.Services.AddSingleton(x =>
+            {
+                var account = new Account(
+                    "dmmoghczd",
+                    "649123847344231",
+                    "NE7L2Ox0W6pMBHvSjCOAibZW9AI");
+
+                var cloudinary = new Cloudinary(account);
+
+                cloudinary.Api.Timeout = 300000; 
+                return cloudinary;
+            });
+
+
 
             var app = builder.Build();
 
@@ -87,7 +106,9 @@ namespace WebApplication2
             app.UseAuthentication();
             
             app.UseAuthorization();
-           
+
+            app.MapHub<ChatHub>("/chathup");
+
 
             app.MapControllerRoute(
                 name: "default",

@@ -54,7 +54,40 @@ html {
     }
 }
 
+#chat-box {
+    display: none;
+    position: fixed;
+    bottom: 80px;
+    right: 30px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    padding: 12px;
+    width: 260px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
 
+#chat-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 70px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 18px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    z-index: 1001;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+}
 
-
-
+    #chat-btn:hover {
+        background-color: #0056b3;
+    }

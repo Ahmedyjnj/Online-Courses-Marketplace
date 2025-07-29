@@ -125,7 +125,7 @@ namespace WebApplication2.Controllers
                 
 
                
-                dto.PhotoUrl = serviceManager.AttachmentService.UploadFile("Students",dto.Photofile);
+                dto.PhotoUrl = await serviceManager.AttachmentService.UploadImage("Students", dto.Photofile);
             }
 
 

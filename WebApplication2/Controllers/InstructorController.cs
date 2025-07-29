@@ -132,7 +132,7 @@ namespace WebApplication2.Controllers
 
 
 
-                dto.PhotoUrl = serviceManager.AttachmentService.UploadFile("Instructors", dto.Photofile);
+                dto.PhotoUrl =await serviceManager.AttachmentService.UploadImage("Instructors", dto.Photofile);
             }
 
 
@@ -191,7 +191,7 @@ namespace WebApplication2.Controllers
             if (dto.Photofile is not null && dto.Photofile.Length > 0)
             {
 
-                dto.PhotoUrl = serviceManager.AttachmentService.UploadFile("Courses", dto.Photofile);
+                dto.PhotoUrl = await serviceManager.AttachmentService.UploadImage("Courses", dto.Photofile);
             }
 
             var result=await serviceManager.CourseService.CreateAsync(dto);

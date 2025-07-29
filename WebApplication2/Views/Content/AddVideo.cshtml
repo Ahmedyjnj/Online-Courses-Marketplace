@@ -1,0 +1,136 @@
+﻿@using Shared.Dto_s.ContentDto
+@model ContentDto
+@* 
+@{
+    ViewData["Title"] = "Add Video";
+} *@
+
+<div class="container mt-5">
+    <h2 class="mb-4">Add New Video Content</h2>
+
+
+    <div id="progressContainer" style="display: none; margin-top: 15px;">
+        <div class="progress">
+            <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated"
+                 role="progressbar" style="width: 0%">
+                0%
+            </div>
+        </div>
+    </div>
+    <div id="uploadResult" class="mt-3"></div>
+    <div id="uploadStatus" class="mt-3"></div>
+
+    <form asp-action="AddVideo" id="uploadForm" asp-controller="Content" method="post" enctype="multipart/form-data" onsubmit="showLoading()">
+        @* Hidden fields *@
+        <input type="hidden" asp-for="CourseId" />
+        <input type="hidden" asp-for="VideoDto.Id" />
+        <input type="hidden" asp-for="ImageDto.Id" />
+
+       
+        <input asp-for="VideoDto.Url" class="form-control"  hidden/>
+        <span asp-validation-for="VideoDto.Url" class="text-danger"></span>
+       
+
+        
+        <input asp-for="ImageDto.Url" class="form-control"  hidden/>
+        <span asp-validation-for="ImageDto.Url" class="text-danger"></span>
+        
+
+        <div class="mb-3">
+            <label asp-for="VideoDto.Title" class="form-label">Video Title</label>
+            <input asp-for="VideoDto.Title" class="form-control" />
+            <span asp-validation-for="VideoDto.Title" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ImageDto.AltText" class="form-label">Image Alt Text</label>
+            <input asp-for="ImageDto.AltText" class="form-control" readonly/>
+            <span asp-validation-for="ImageDto.AltText" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="VideoDto.Videofile" class="form-label">Upload Video File</label>
+            <input asp-for="VideoDto.Videofile" type="file" class="form-control" />
+            <span asp-validation-for="VideoDto.Videofile" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ImageDto.Photofile" class="form-label">Upload Thumbnail Image</label>
+            <input asp-for="ImageDto.Photofile" type="file" class="form-control" />
+            <span asp-validation-for="ImageDto.Photofile" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            <i class="bi bi-upload"></i> Upload Content
+        </button>
+        <a asp-action="Index" asp-route-id="@Model.CourseId" class="btn btn-secondary ms-2">Cancel</a>
+    </form>
+
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const titleInput = document.querySelector('[name="VideoDto.Title"]');
+            const altTextInput = document.querySelector('[name="ImageDto.AltText"]');
+
+            if (titleInput && altTextInput) {
+                titleInput.addEventListener("input", function () {
+                    altTextInput.value = titleInput.value;
+                });
+            }
+        });
+
+
+                document.getElementById("uploadForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            var form = document.getElementById("uploadForm");
+            var formData = new FormData(form);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/Content/AddVideo", true);
+
+            xhr.upload.onprogress = function (event) {
+                if (event.lengthComputable) {
+                    var percentComplete = Math.round((event.loaded / event.total) * 100);
+                    var progressBar = document.getElementById("progressBar");
+                    progressBar.style.width = percentComplete + "%";
+                    progressBar.innerText = percentComplete + "%";
+                    document.getElementById("progressContainer").style.display = "block";
+
+                    if (percentComplete === 100) {
+                        document.getElementById("uploadStatus").innerHTML =
+                            "<div class='alert alert-info mt-2'>⏳ جارٍ معالجة الفيديو، يُرجى الانتظار...</div>";
+                    }
+                }
+            };
+
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
+                    document.getElementById("uploadResult").innerHTML =
+                        "<div class='alert alert-success'>✅ تم رفع الفيديو!</div>";
+
+                    setTimeout(function () {
+                        window.location.href = response.redirectUrl;
+                    }, 2000);
+                } else {
+                    document.getElementById("uploadResult").innerHTML =
+                        "<div class='alert alert-danger'>❌ حدث خطأ أثناء رفع الفيديو.</div>";
+                }
+            };
+
+            xhr.onerror = function () {
+                document.getElementById("uploadResult").innerHTML =
+                    "<div class='alert alert-danger'>❌ فشل الاتصال بالخادم.</div>";
+            };
+
+            // ✅ هذه أهم خطوة كانت ناقصة
+            xhr.send(formData);
+
+        });
+
+    </script>
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

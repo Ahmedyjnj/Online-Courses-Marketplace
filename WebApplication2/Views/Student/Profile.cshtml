@@ -83,7 +83,7 @@
                                         <h5 class="card-title text-info">@course.Title</h5>
                                         <p class="card-subtitle mb-2 text-muted">@course.Category</p>
                                         <p class="card-text flex-grow-1">@course.Description</p>
-                                        <a href="@Url.Action("Details", "Courses", new { id = course.Id })" class="btn btn-outline-info mt-3">عرض المحتوى</a>
+                                        <a href="@Url.Action("Details", "Course", new { id = course.Id })" class="btn btn-outline-info mt-3">عرض المحتوى</a>
                                     </div>
                                     @if (course.Instructor != null)
                                     {

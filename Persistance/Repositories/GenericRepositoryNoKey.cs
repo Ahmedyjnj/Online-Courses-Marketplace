@@ -29,14 +29,16 @@ namespace Persistance.Repositories
 
             }
 
-            public async Task UpdateAsync(TEntity entity)
+            public  Task UpdateAsync(TEntity entity)
             {
                 context.Set<TEntity>().Update(entity);
-            }
+            return Task.CompletedTask;
+        }
 
-            public async Task DeleteAsync(TEntity entity)
+            public  Task DeleteAsync(TEntity entity)
             {
                 context.Set<TEntity>().Remove(entity);
+                return Task.CompletedTask;
             }
 
             public async Task<IEnumerable<TEntity>> GetWhereAsync(Expression<Func<TEntity, bool>> predicate)

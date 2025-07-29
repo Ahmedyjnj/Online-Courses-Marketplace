@@ -9,7 +9,7 @@ using WebApplication2.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Domain.Models.Identity;
 using static Domain.Models.Identity.ApplicationUser;
-using Microsoft.AspNetCore.Authorization;
+
 
 namespace WebApplication2.Controllers;
 

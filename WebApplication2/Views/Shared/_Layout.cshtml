@@ -1,6 +1,5 @@
 ﻿@using System.Security.Claims
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +9,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WebApplication2.styles.css" asp-append-version="true" />
-
+    
 </head>
 <body style="padding-top: 70px;">
     <header>
@@ -28,41 +27,31 @@
                         </li>
                         @if (SignInManager.IsSignedIn(User))
                         {
+                            var userType = User.FindFirst("UserType")?.Value;
+                            var forignId = User.FindFirst("ForignId")?.Value;
 
-                                var userType = User.FindFirst("UserType")?.Value;
-                                var forignId = User.FindFirst("ForignId")?.Value;
-                            
-
-                           
-                                if (userType == "Student")
-                                {
-                                    <li class="nav-item">
-                                        <a class="nav-link" asp-controller="Student" asp-action="Profile" asp-route-id="@forignId">MyProfile</a>
-                                   
-
-                                    </li>
-                                }
-                                else if (userType == "Instructor")
-                                {
-                                    <li class="nav-item">
-                                        <a class="nav-link" asp-controller="Instructor" asp-action="Profile" asp-route-id="@forignId">MyProfile</a>
-                                    </li>
-                                }
-                            
+                            if (userType == "Student")
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Student" asp-action="Profile" asp-route-id="@forignId">MyProfile</a>
+                                </li>
+                            }
+                            else if (userType == "Instructor")
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Instructor" asp-action="Profile" asp-route-id="@forignId">MyProfile</a>
+                                </li>
+                            }
                         }
-                        <!-- Add more nav items here as needed -->
                     </ul>
                     <ul class="navbar-nav ms-3 mb-2 mb-lg-0">
                         @if (User.Identity != null && User.Identity.IsAuthenticated)
                         {
-
-
                             var name = User.FindFirst("DisplayName")?.Value;
                             var photo = User.FindFirst("PhotoUrl")?.Value;
 
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                   
                                     <img src="@(photo ?? Url.Content("~/Content/Images/default-user.png"))" alt="..." class="rounded-circle me-2" style="width:32px; height:32px; object-fit:cover;">
                                     <span>@name </span>
                                 </a>
@@ -80,23 +69,67 @@
                     </ul>
                 </div>
             </div>
+          
         </nav>
     </header>
 
     <div class="container">
         <main role="main">
+            <button id="chat-btn" class="btn btn-success">💬 Help</button>
+
+            <div id="chat-box" style="display:none; position:fixed; bottom:70px; right:20px; width:300px; background:white; padding:10px; border:1px solid #ccc;">
+                <div id="chat-messages" style="height:150px; overflow-y:scroll; border:1px solid #ddd; padding:5px;"></div>
+                <input type="text" id="chat-input" class="form-control mt-2" placeholder="Type a message..." />
+                <button id="send-btn" class="btn btn-primary mt-1 w-100">Send</button>
+            </div>
+
+
+           
             @RenderBody()
         </main>
     </div>
-</body>
-@* <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - WebApplication2 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer> *@
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="~/js/site.js" asp-append-version="true"></script>
-@await RenderSectionAsync("Scripts", required: false)
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const user = "@(User.Identity?.IsAuthenticated == true ? User.FindFirst("DisplayName")?.Value : "Guest")";
 
+            const connection = new signalR.HubConnectionBuilder()
+                .withUrl("/chathup")
+                .build();
+
+            connection.start().then(() => {
+                console.log("SignalR Connected");
+            }).catch(err => console.error(err.toString()));
+
+            connection.on("ReceiveMessage", (user, message) => {
+                const chat = document.getElementById("chat-messages");
+                const msg = document.createElement("div");
+                msg.innerHTML = `<strong>${user}</strong>: ${message}`;
+                chat.appendChild(msg);
+                chat.scrollTop = chat.scrollHeight;
+            });
+
+            document.getElementById("send-btn").addEventListener("click", () => {
+                const msg = document.getElementById("chat-input").value;
+                if (msg.trim() === "") return;
+
+                connection.invoke("SendMessage", user, msg).catch(err => console.error(err.toString()));
+                document.getElementById("chat-input").value = "";
+            });
+
+            document.getElementById("chat-btn").addEventListener("click", () => {
+                const box = document.getElementById("chat-box");
+                box.style.display = (box.style.display === "none") ? "block" : "none";
+            });
+        });
+    </script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/aspnet-signalr/signalr.min.js"></script>
+
+
+
+@await RenderSectionAsync("Scripts", required: false)
+</body>
 </html>

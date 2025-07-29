@@ -16,6 +16,7 @@ namespace Shared.Dto_s.CourseDto
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
 
+        public int Price { get; set; }
         public string? PhotoUrl { get; set; }
         public Guid InstructorId { get; set; }
         public IFormFile? Photofile { get; set; }

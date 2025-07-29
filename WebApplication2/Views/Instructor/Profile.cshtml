@@ -113,8 +113,11 @@
                                         @if (isOwner)
                                         {
                                             <a href="@Url.Action("Edit", "Course", new { id = course.Id })" class="btn btn-outline-warning mt-2">
-                                                <i class="bi bi-pencil-square"></i> تعديل الدورة
+                                                <i class="bi bi-pencil-square"></i> تعديل الكورس
                                             </a>
+                                                <a href="@Url.Action("Index", "Content", new { id = course.Id })" class="btn btn-outline-secondary mt-2">
+                                                    <i class="bi bi-pencil-square"></i> تعديل المحتوى
+                                                </a>
                                         }
                                     
                                     </div>

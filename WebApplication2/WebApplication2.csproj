@@ -20,4 +20,8 @@
     <ProjectReference Include="..\Persistance\Persistance.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="attachments\videos\" />
+  </ItemGroup>
+
 </Project>

@@ -11,9 +11,10 @@ namespace Abstraction
     {
        
 
-        public string UploadFile(String TypeName,IFormFile file);
-
-        public bool DeleteFile(string filePath);
-
+        public Task<string> UploadImage(String TypeName,IFormFile file);
+        //public Task<string> UploadVideo(string? courseid, IFormFile file, string InstructorId);
+        public Task<bool> DeletePhoto(string filePath);
+        public Task<bool> DeleteVideoAsync(string url);
+        public  Task<string> UploadVideoAsync(IFormFile file);
     }
 }

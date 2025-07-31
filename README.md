@@ -106,10 +106,8 @@ A full-featured online course platform built using **ASP.NET Core MVC**, offerin
 
 ## 🚧 Security
 
-* JWT or Identity authentication (uses ASP.NET Identity)
+* Identity authentication (uses ASP.NET Identity)
 * Role-based authorization
-* Secret scanning protected
-
 ---
 
 ## 🔧 How to Run
